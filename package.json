@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@tweenjs/tween.js": "^18.5.0",
+    "apu": "^0.2.32",
     "base64-js": "^1.3.0",
     "core-js": "^3.6.5",
     "equals": "^1.1.0",

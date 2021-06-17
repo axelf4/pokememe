@@ -17,12 +17,15 @@ import Game from "Game";
 import TransitionState, {fade} from "TransitionState";
 import "touchControl";
 import TWEEN from "@tweenjs/tween.js";
+import * as APU from "apu";
 
 import Trainer from "Trainer";
 import Pokemon, {pokemons, moves} from "./pokemon";
 import Item from "./item";
 
 import * as lootTable from "lootTable";
+
+import song from "../gbs2vgm/out.vgm";
 
 console.log("----- Starting the game -----");
 
@@ -34,6 +37,17 @@ input.setListener((type, key) => {
 	if (type === input.KEY_ACTION_UP && key === "f") renderer.toggleFullscreen();
 	else stateManager.getState().onKey(type, key);
 });
+
+new Promise((resolve, _reject) => { document.body
+									? resolve()
+									: document.addEventListener("DOMContentLoaded", resolve) })
+	.then(() => {
+		APU.allow();
+		document.body.addEventListener('mousedown', APU.allow);
+		document.body.addEventListener('touchstart', APU.allow);
+	});
+
+fetch(song).then(res => res.arrayBuffer()).then(APU.fromFile).then(track => { track.play(); });
 
 const transitionState = new TransitionState(null, fade);
 stateManager.setState(transitionState);

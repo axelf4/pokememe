@@ -56,7 +56,10 @@ module.exports = {
 				exclude: /(node_modules|bower_components)/,
 				loader: "babel-loader",
 			},
-			{ test: /\.glsl$/, loader: "webpack-glsl-loader" },
+			{
+				test: /\.vgm/,
+				type: 'asset',
+			},
 		]
 	}
 };
